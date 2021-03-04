@@ -1,0 +1,15 @@
+Day,outlook,temperature,humidity,wind,Decion
+1,sunny,hot,high,weak,No
+2,sunny,hot,high,strong,No
+3,overcast,hot,high,weak,Yes
+4,rainfall,mild,high,weak,Yes
+5,rainfall,cool,normal,weak,Yes
+6,rainfall,cool,normal,strong,No
+7,overcast,cool,normal,strong,Yes
+8,sunny,mild,high,weak,No
+9,sunny,cool,normal,weak,Yes
+10,rainfall,mild,normal,weak,Yes
+11,sunny,mild,normal,strong,Yes
+12,overcast,mild,high,strong,Yes
+13,overcast,hot,normal,weak,Yes
+14,rainfall,mild,high,strong,No
