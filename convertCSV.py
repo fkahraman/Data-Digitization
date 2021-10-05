@@ -9,11 +9,13 @@ import pandas as pd
 
 class Converter:
 
-    def __init__(self, path):
+    def __init__(self, path=None, df=None):
         self._path = path
+        self._df = df
         self._content = ""
         self._labels = []
         self._dataframe = ""
+        self._path_flag = not path == None
 
         self.readLabel()
         self.createVeriable()
@@ -21,22 +23,31 @@ class Converter:
         self.convert()
         self.createDf()
 
+
     #   Read Label
     def readLabel(self):
-        f = open(self._path, 'r')
-        text = f.readlines()
-        self._content = text[1:]
-        self._labels = text[0].replace('\n', "").split(',')
+        if self._path_flag:
+            f = open(self._path, 'r')
+            text = f.readlines()
+            self._content = text[1:]
+            self._labels = text[0].replace('\n', "").split(',')
+        else:
+            self._labels = self._df.columns.values
 
     def createVeriable(self):
         for l in self._labels:
             globals()[l] = []
 
     def matchColumn(self):
-        for c in self._content:
-            text = c.replace('\n', "").split(',')
-            for index, l in enumerate(self._labels):
-                (globals()[l]).append(text[index])
+        if self._path_flag:
+            for c in self._content:
+                text = c.replace('\n', "").split(',')
+                for index, l in enumerate(self._labels):
+                    (globals()[l]).append(text[index])
+        else:
+            for text in self._df.values:
+                for index, l in enumerate(self._labels):
+                    (globals()[l]).append(text[index])
 
     #   Categoric data to numbers
     def convert(self):
@@ -65,7 +76,14 @@ class Converter:
 
     #   Save digit csv
     def recordDf(self):
-        path_name = self._path.replace(".csv", "")
+        if self._path_flag:
+            path_name = self._path.replace(".csv", "")
+        else:
+            path_name = 'df'
         self._dataframe.to_csv(f"{path_name}_digit.csv", index=False)
+
+    #   Return Digit
+    def getProcessedDf(self):
+        return self._dataframe
 
 
