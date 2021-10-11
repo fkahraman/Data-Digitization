@@ -7,7 +7,7 @@
 """
 
 import pandas as pd
-from convertCSV import Converter
+from digitization import Converter
 
 if __name__ == '__main__':
 
